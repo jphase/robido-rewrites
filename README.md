@@ -49,7 +49,7 @@ The URL that I tested this on was http://theurlformysite.com/property/?id=12
 
 To-do
 ----
-What needs to be done
+* Ability to control native $wp_query object properties in the rewrite settings filter (this way you can tell WordPress your rewrite is an archive and use is_archive() and such)
 * This is super barebones so please feel free to find me on IRC (freenode) in #wordpress, ##wordpress, and #robido and let me know what you'd like added
 
 License
