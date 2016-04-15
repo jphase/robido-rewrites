@@ -35,7 +35,7 @@ function my_custom_rewrite_rules( $rules ) {
 add_filter( 'robido_rewrites', 'my_custom_rewrite_rules' );
 ```
 
-**Note:** _This is the same rewrite as the Simple Rewrite example above, except on a URL like **/property/12/bar/** it will map $_GET params in the order of the params array as shown in this table below:
+**Note:** _This is the same rewrite as the Simple Rewrite example above, except on a URL like **/property/12/bar/** it will map $_GET params in the order of the params array as shown in this table below:_
 
 | Example URL               | Param        | Value  |
 | ------------------------- |--------------| ------ |
