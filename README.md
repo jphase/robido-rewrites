@@ -45,7 +45,7 @@ Here's a sample template file that I used to play around and test this plugin (i
 	get_footer();
 ```
 
-The URL that I tested this on was http://mysite.com/property/?id=12
+The URL that I tested this on was http://theurlformysite.com/property/?id=12
 
 To-do
 ----
