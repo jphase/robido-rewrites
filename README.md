@@ -37,11 +37,11 @@ add_filter( 'robido_rewrites', 'my_custom_rewrite_rules' );
 
 **Note:** _This is the same rewrite as the Simple Rewrite example above, except on a URL like **/property/12/bar/** it will map $_GET params in the order of the params array as shown in this table below:
 
-| Example URL               | Param         | Value |
-| ------------------------- |:-------------:| -----:|
-| /property/12              | $_GET['id']   | 12    |
-| /property/12/bar          | $_GET['foo']  | bar   |
-| /property/12/bar/?id=fail | $_GET['id']   | 12    |
+| Example URL               | Param        | Value  |
+| ------------------------- |--------------| ------ |
+| /property/12              | $_GET['id']  | 12     |
+| /property/12/bar          | $_GET['foo'] | bar    |
+| /property/12/bar/?id=fail | $_GET['id']  | 12     |
 
 **Note:** If your defined params match one of the $_GET params you stick on the end of the URL, the params that are in the rewrite will take place and the $_GET string itself will be ignored.
 
