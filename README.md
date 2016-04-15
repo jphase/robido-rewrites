@@ -1,12 +1,12 @@
 Robido Rewrites
-=========
+===============
 
 This is a simple WordPress plugin that is designed for developers who want to quickly and painlessly add custom rewrite rules that map to a custom template they create.
 
 The settings are controlled entirely by the theme, and require for you to create your own templates. Read below for instructions on how to set this up.
 
 Theme Rewrite Settings
------------
+----------------------
 
 To get started, you'll need to add a filter to your theme. There are two ways to do this currently, one is a very simple rewrite just to get the template to load, and the other is more advanced. 
 
@@ -20,7 +20,7 @@ function my_custom_rewrite_rules( $rules ) {
 add_filter( 'robido_rewrites', 'my_custom_rewrite_rules' );
 ```
 
-**Note:** _This will take any URL like http://yourwebsite.com/**property** and rewrite it to render the file **template-property.php** in your theme's directory. You can pass $_GET params on the end of the URL like you normally would with /property/?id=12&foo=bar and the directives past **/property/** will be ignored._
+**Note:** _This will take any URL like **/property** and rewrite it to render the file **template-property.php** in your theme's directory. You can pass $_GET params on the end of the URL like you normally would with **/property/?id=12&foo=bar** and the directives past **/property/** will be ignored._
 
 #### An Advanced Rewrite:
 ```php
@@ -35,7 +35,18 @@ function my_custom_rewrite_rules( $rules ) {
 add_filter( 'robido_rewrites', 'my_custom_rewrite_rules' );
 ```
 
-**Note:** _This is the same rewrite as the Simple Rewrite example above, except on a URL like **/property/12/bar/** it will map $_GET params in the order of the params array. This means **$_GET['id'] = 12** and **$_GET['foo'] = 'bar'**
+**Note:** _This is the same rewrite as the Simple Rewrite example above, except on a URL like **/property/12/bar/** it will map $_GET params in the order of the params array as shown in this table below:
+
+| Example URL               | Param         | Value |
+| ------------------------- |:-------------:| -----:|
+| /property/12              | $_GET['id']   | 12    |
+| /property/12/bar          | $_GET['foo']  | bar   |
+| /property/12/bar/?id=fail | $_GET['id']   | 12    |
+
+**Note:** If your defined params match one of the $_GET params you stick on the end of the URL, the params that are in the rewrite will take place and the $_GET string itself will be ignored.
+
+Template File
+-------------
 
 Here's a sample template file that I used to play around and test this plugin (it's the template-property.php file from the filter above):
 
