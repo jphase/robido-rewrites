@@ -50,11 +50,7 @@ class Rewrites {
 	// After theme loaded hook
 	function after_theme_loaded() {
 		// Initialize settings array (but let's add /property/ as a default rewrite for an example)
-		$this->settings = apply_filters( 'robido_rewrites', array(
-			'rewrites'	=> array(
-				// 'property'		=> plugin_dir_path( __FILE__ ) . 'template-property.php',
-			),
-		));
+		$this->settings = apply_filters( 'robido_rewrites', array() );
 	}
 
 	// Template include filter
