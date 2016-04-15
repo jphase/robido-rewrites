@@ -23,6 +23,28 @@ function my_custom_rewrite_rules() {
 add_filter( 'robido_rewrites', 'my_custom_rewrite_rules' );
 ```
 
+Here's a sample template file that I used to play around and test this plugin (it's the template-property.php file from the filter above):
+
+```php
+<?php
+	get_header();
+	global $wp_query, $robido_rewrites;
+?>
+
+<h1>Testing our ID: <?php echo get_query_var( 'id' ); ?></h1>
+
+<?php
+	echo '<h1>$wp_query->query_vars</h1><pre>';
+	print_r( $wp_query->query_vars );
+	echo '</pre>';
+
+	echo '<h1>$robido_rewrites</h1><pre>';
+	print_r( $robido_rewrites );
+	echo '</pre>';
+
+	get_footer();
+```
+
 To-do
 ----
 What needs to be done
