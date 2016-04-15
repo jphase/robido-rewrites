@@ -20,7 +20,7 @@ function my_custom_rewrite_rules() {
 	);
 	return $rewrites;
 }
-add_action( 'robido_rewrites', 'my_custom_rewrite_rules' );
+add_filter( 'robido_rewrites', 'my_custom_rewrite_rules' );
 ```
 
 To-do
