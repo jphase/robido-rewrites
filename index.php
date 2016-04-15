@@ -5,7 +5,7 @@ namespace robido;
 * Plugin URI:	http://robido.com/robido-rewrites
 * Description:	A utility plugin for developers to easily add rewrites and route them to templates
 * Version:		1.0.0
-* Author:		Jeff Hays
+* Author:		Jeff Hays (jphase)
 * Author URI:	https://profiles.wordpress.org/jphase/
 * Text Domain:	robido
 * License:		GPL2
