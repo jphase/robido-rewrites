@@ -32,12 +32,17 @@ class Rewrites {
 
 	// Init hook (before anything)
 	function init() {
-		// Call our after_theme_loaded function just to grab our settings available this early (query_vars happens before wp)
+		// Call our after_theme_loaded function just to grab our filtered settings this early (query_vars happens before wp)
 		$this->after_theme_loaded();
 		if ( ! empty( $this->settings ) ) {
 			foreach ( $this->settings as $rewrite => $template ) {
-				// Add rewrite rule
-				add_rewrite_rule( $rewrite . '/(.*)/?', 'index.php?' . $rewrite . '=$matches[1]', 'top' );
+				// Add rewrite rules and tags from our filtered settings
+				$tag = $rewrite;
+				if ( is_array( $template ) && isset( $template['tag'] ) ) {
+					$tag = $template['tag'];
+				}
+				add_rewrite_rule( $rewrite . '/(.*)/?', 'index.php?' . $tag . '=$matches[1]', 'top' );
+				add_rewrite_tag( '%' . $tag . '%', '([^&]+)' );
 
 				// Check if this is an advanced rewrite (when the rewrite is an array of settings instead of a simple template)
 				if ( is_array( $template ) ) {
@@ -78,7 +83,7 @@ class Rewrites {
 
 	// After theme loaded hook
 	function after_theme_loaded() {
-		// Initialize settings array (but let's add /property/ as a default rewrite for an example)
+		// Initialize settings by pulling our settings from the theme filters
 		$this->settings = apply_filters( 'robido_rewrites', array() );
 	}
 
@@ -87,8 +92,8 @@ class Rewrites {
 		global $wp_query;
 
 		// Explode our URL bits for params
-		$urlbits = explode( '?', $_SERVER['REQUEST_URI'] );
 		$params = '';
+		$urlbits = explode( '?', $_SERVER['REQUEST_URI'] );
 		if ( count( $urlbits ) > 1 ) {
 			$params = end( $urlbits );
 			array_pop( $urlbits );
@@ -108,6 +113,7 @@ class Rewrites {
 					$template = $settings['template'];
 					$params = $settings['params'];
 				}
+				// Check our URL against the rewrite rules from filtered settings
 				if ( $urlbits[0] == $rewrite ) {
 					// Setup some WP_Query stuff so WordPress doesn't throw funky headers or do anything weird
 					$wp_query->is_404 = false;
