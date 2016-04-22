@@ -36,13 +36,11 @@ class Rewrites {
 		$this->after_theme_loaded();
 		if ( ! empty( $this->settings ) ) {
 			foreach ( $this->settings as $rewrite => $template ) {
+				// Setup tag with either tag arg from filtered settings or just the rewrite rule word itself
+				$tag = is_array( $template ) && isset( $template['tag'] ) ? $template['tag'] : $rewrite;
+
 				// Add rewrite rules and tags from our filtered settings
-				$tag = $rewrite;
-				if ( is_array( $template ) && isset( $template['tag'] ) ) {
-					$tag = $template['tag'];
-				}
 				add_rewrite_rule( $rewrite . '/(.*)/?', 'index.php?' . $tag . '=$matches[1]', 'top' );
-				add_rewrite_tag( '%' . $tag . '%', '([^&]+)' );
 
 				// Check if this is an advanced rewrite (when the rewrite is an array of settings instead of a simple template)
 				if ( is_array( $template ) ) {
