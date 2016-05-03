@@ -25,9 +25,6 @@ class Rewrites {
 
 		// Filters
 		add_filter( 'template_include', array( $this, 'template_include' ) );
-
-		// Shortcodes
-		add_shortcode( 'properties', array( $this, 'list_properties' ) );
 	}
 
 	// Init hook (before anything)
