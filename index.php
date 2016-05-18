@@ -32,17 +32,16 @@ class Rewrites {
 		// Call our after_theme_loaded function just to grab our filtered settings this early (query_vars happens before wp)
 		$this->after_theme_loaded();
 		if ( ! empty( $this->settings ) ) {
-			foreach ( $this->settings as $rewrite => $template ) {
-				// Setup tag with either tag arg from filtered settings or just the rewrite rule word itself
-				$tag = is_array( $template ) && isset( $template['tag'] ) ? $template['tag'] : $rewrite;
+			foreach ( $this->settings as $rewrite => $settings ) {
+				// add_rewrite_rule('([/]*.*)' . $rewrite . '/([^/]*)/?', 'index.php?pagename=$matches[1]' . $rewrite . '&somevar=$matches[2]&anothervar=$matches[1]', 'top');
+				$prefix = '';
 
 				// Add rewrite rules and tags from our filtered settings
-				add_rewrite_rule( $rewrite . '/(.*)/?', 'index.php?' . $tag . '=$matches[1]', 'top' );
+				add_rewrite_rule( $prefix . $rewrite . '/(.*)/?', 'index.php?' . $rewrite . '=$matches[1]', 'top' );
 
 				// Check if this is an advanced rewrite (when the rewrite is an array of settings instead of a simple template)
-				if ( is_array( $template ) ) {
+				if ( is_array( $settings ) ) {
 					// Setup settings from advanced rewrite array
-					$settings = $template;
 					$template = $settings['template'];
 					$params = isset( $settings['params'] ) ? $settings['params'] : false;
 

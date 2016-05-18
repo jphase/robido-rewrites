@@ -24,7 +24,7 @@ add_filter( 'robido_rewrites', 'my_custom_rewrite_rules' );
 
 #### An Advanced Rewrite:
 ```php
-// Robido simple rewrite example
+// Robido advanced rewrite example
 function my_custom_rewrite_rules( $rules ) {
 	$rules['property'] = array(
 		'template'	=> get_stylesheet_directory() . '/template-property.php',
