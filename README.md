@@ -40,8 +40,13 @@ add_filter( 'robido_rewrites', 'my_custom_rewrite_rules' );
 | Example URL               | Param        | Value  |
 | ------------------------- |--------------| ------ |
 | /property/12              | $_GET['id']  | 12     |
-| /property/12/bar          | $_GET['foo'] | bar    |
+| /property/12/bar          | $_GET['id']  | 12     |
+|                           | $_GET['foo'] | bar    |
 | /property/12/bar/?id=fail | $_GET['id']  | 12     |
+|                           | $_GET['foo'] | bar    |
+| /property/12/bar/?test=ok | $_GET['id']  | 12     |
+|                           | $_GET['foo'] | bar    |
+|                           | $_GET['test']| ok     |
 
 **Note:** If your defined params match one of the $_GET params you stick on the end of the URL, the params that are in the rewrite will take place and the $_GET string itself will be ignored.
 
